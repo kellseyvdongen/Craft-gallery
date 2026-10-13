@@ -13,11 +13,15 @@
     <style>
         body {
         }
-
         main {
             font-size: 1.3rem;
             padding: 20px;
         }
+
+        nav {
+            font-weight: bolder;
+        }
+
     </style>
 </head>
 <body>

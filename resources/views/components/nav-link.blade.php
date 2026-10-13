@@ -1,6 +1,6 @@
 @props([
     'active' => false
 ])
-<a {{ $attributes }} class="{{$active ? 'background-color: #4CAF50;' : ''}}">
+<a {{ $attributes }} class="{{$active ? 'text-orange-900' : ''}}">
     {{ $slot }}
 </a>
