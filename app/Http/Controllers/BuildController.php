@@ -37,7 +37,8 @@ class BuildController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $build = Build::findOrFail($id);
+        return view('builds.show', compact('build'));
     }
 
     /**

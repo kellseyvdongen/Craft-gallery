@@ -11,17 +11,13 @@
     <title>{{ $title }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        body {
-        }
-        main {
-            font-size: 1.3rem;
-            padding: 20px;
-        }
-
         nav {
             font-weight: bolder;
         }
 
+        main {
+            padding: 2% 5%;
+        }
     </style>
 </head>
 <body>
