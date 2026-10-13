@@ -3,10 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BuildController;
 
 Route::view('/', 'welcome')->name('home');
 
 Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
+
+Route::get('/builds', [BuildController::class, 'index'])->name('builds-index');
+Route::get('/details/{build}', [BuildController::class, 'show'])->name('builds-show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
