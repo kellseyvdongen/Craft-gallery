@@ -21,7 +21,7 @@ class BuildController extends Controller
      */
     public function create()
     {
-        //
+        return view('builds.create');
     }
 
     /**
@@ -29,7 +29,21 @@ class BuildController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+
+        ]);
+        $nameOfFile = $request->file('image_url')->storePublicly('builds', 'public');
+        $build = new Build();
+        $build->title = $request->input('title');
+        $build->description = $request->input('description');
+        $build->image_url = $nameOfFile;
+        $build->user_id = '1';
+        $build->category_id = $request->input('category_id') ?? '1';
+        $build->save();
+
+        return redirect()->route('builds-index')->with('success', 'Build created successfully.');
     }
 
     /**

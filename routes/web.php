@@ -11,6 +11,8 @@ Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
 
 Route::get('/builds', [BuildController::class, 'index'])->name('builds-index');
 Route::get('/builds/{build}', [BuildController::class, 'show'])->name('builds-show');
+Route::get('/builds-create', [BuildController::class, 'create'])->name('builds-create');
+Route::post('/builds', [BuildController::class, 'store'])->name('builds-store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

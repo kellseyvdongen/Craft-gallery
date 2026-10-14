@@ -3,6 +3,8 @@
         <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Home</x-nav-link>
         <x-nav-link href="{{ route('about-us') }}" :active="request()->routeIs('about-us')">About us</x-nav-link>
         <x-nav-link href="{{ route('builds-index')}}" :active="request()->routeIs('builds-index')">Builds</x-nav-link>
+        <x-nav-link href="{{ route('builds-create') }}" :active="request()->routeIs('builds-create')">Create Build
+        </x-nav-link>
     </div>
     <div>
         <img class="h-14" src="{{ asset('images/craftgallery-logo.png') }}" alt="logo">
