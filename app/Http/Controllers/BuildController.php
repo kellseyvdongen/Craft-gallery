@@ -32,7 +32,6 @@ class BuildController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
-
         ]);
         $nameOfFile = $request->file('image_url')->storePublicly('builds', 'public');
         $build = new Build();
@@ -60,8 +59,8 @@ class BuildController extends Controller
      */
     public function edit(string $id)
     {
-        $build = Build::findOrFail($id);
-        return view('builds.edit', compact('build'));
+//        $build = Build::findOrFail($id);
+//        return view('builds.edit', compact('build'));
     }
 
     /**

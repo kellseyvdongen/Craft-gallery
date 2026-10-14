@@ -10,8 +10,8 @@
                 <div>
                     <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $build->id) }}">View Details</a>
-                    <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
-                       href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>
+                    {{--                    <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"--}}
+                    {{--                       href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>--}}
                 </div>
         </article>
     @endforeach
