@@ -60,7 +60,8 @@ class BuildController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $build = Build::findOrFail($id);
+        return view('builds.edit', compact('build'));
     }
 
     /**

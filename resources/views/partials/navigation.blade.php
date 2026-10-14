@@ -1,4 +1,4 @@
-<nav class="bg-green-800 text-white flex justify-between items-center px-4 py-2">
+<nav class="bg-green-700 text-white flex justify-between items-center px-4 py-2">
     <div class="flex space-x-4">
         <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Home</x-nav-link>
         <x-nav-link href="{{ route('about-us') }}" :active="request()->routeIs('about-us')">About us</x-nav-link>

@@ -13,6 +13,12 @@ Route::get('/builds', [BuildController::class, 'index'])->name('builds-index');
 Route::get('/builds/{build}', [BuildController::class, 'show'])->name('builds-show');
 Route::get('/builds-create', [BuildController::class, 'create'])->name('builds-create');
 Route::post('/builds', [BuildController::class, 'store'])->name('builds-store');
+Route::get('/builds/{build}/edit)', [BuildController::class, 'edit'])->name('builds-edit');
+Route::post('/builds', [BuildController::class, 'update'])->name('builds-update');
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

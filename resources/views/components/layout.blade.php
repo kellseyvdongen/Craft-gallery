@@ -14,7 +14,6 @@
         nav {
             font-weight: bolder;
         }
-
         main {
             padding: 2% 5%;
         }

@@ -8,9 +8,10 @@
                 <h2 class="font-bold">{{$build->title}}</h2>
                 <p>{{$build->description}}</p>
                 <div>
-                    <a class="p-2 bg-green-700 text-white rounded-xl hover:bg-green-600"
+                    <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $build->id) }}">View Details</a>
-                    <a class="p-2 bg-green-700 text-white rounded-xl hover:bg-green-600">Update information</a>
+                    <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
+                       href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>
                 </div>
         </article>
     @endforeach

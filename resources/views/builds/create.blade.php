@@ -1,27 +1,42 @@
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    form div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+</style>
 <x-layout title="Create Build">
-    <h1>Add your build to our site!</h1>
+    <div class="max-w-5xl align-middle mx-auto p-4">
+        <h1 class="font-bold text-2xl mb-4">Add your build to our site!</h1>
     <form method="POST" action="{{route('builds-store')}}" enctype="multipart/form-data">
         <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" required value="{{old('title')}}">
+            <label class="font-bold" for="title">Title</label>
+            <input class="border-green-700 p-2" type="text" id="title" name="title" required value="{{old('title')}}">
             @error ('title')
             <span class="text-green-800">{{$message}}</span>
             @enderror
         </div>
         <div>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" required>{{old('description')}}</textarea>
+            <label class="font-bold" for="description">Description</label>
+            <textarea class="border-green-700 p-2" id="description" name="description"
+                      required>{{old('description')}}</textarea>
             @error ('description')
             <span class="text-green-700">{{$message}}</span>
             @enderror
         </div>
         <div>
-            <label for="image_url">Image URL</label>
+            <label class="font-bold" for="image_url">Image URL</label>
             <input type="file" id="image_url" name="image_url" value="{{old('image_url')}}">
         </div>
         <div>
-            <label for="category">Category</label>
-            <input type="text" id="category" name="category" value="{{old('category')}}">
+            <label class="font-bold" for="category">Category</label>
+            <input class="border-green-700 p-2" type="text" id="category" name="category" value="{{old('category')}}">
             @error ('category')
             <span class="text-green-700">{{$message}}</span>
             @enderror
@@ -31,4 +46,5 @@
             </button>
         </div>
     </form>
+    </div>
 </x-layout>
