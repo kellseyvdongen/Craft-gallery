@@ -59,8 +59,8 @@ class BuildController extends Controller
      */
     public function edit(string $id)
     {
-//        $build = Build::findOrFail($id);
-//        return view('builds.edit', compact('build'));
+        $build = Build::findOrFail($id);
+        return view('builds.edit', compact('build'));
     }
 
     /**
@@ -68,7 +68,23 @@ class BuildController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $build = Build::findOrFail($id);
+        $build->title = $request->input('title');
+        $build->description = $request->input('description');
+        if ($request->hasFile('image_url')) {
+            $nameOfFile = $request->file('image_url')->storePublicly('builds', 'public');
+            $build->image_url = $nameOfFile;
+        }
+        $build->save();
+
+
+        return redirect()->route('builds-index')->with('success', 'Build updated successfully.');
+
     }
 
     /**
@@ -76,6 +92,9 @@ class BuildController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $build = Build::findOrFail($id);
+        $build->delete();
+
+        return redirect()->route('builds-index')->with('success', 'Build deleted successfully.');
     }
 }
