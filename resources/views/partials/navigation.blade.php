@@ -10,7 +10,14 @@
         <img class="h-14" src="{{ asset('images/craftgallery-logo.png') }}" alt="logo">
     </div>
     <div class="flex space-x-4">
-        <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">Login</x-nav-link>
-        <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">Register</x-nav-link>
+        @auth
+            <x-nav-link>{{ Auth::user()->name }}</x-nav-link>
+            <form method="POST" action="{{ route('logout') }}">
+                <button type="submit">Log out</button>
+            </form>
+        @else
+            <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">Login</x-nav-link>
+            <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">Register</x-nav-link>
+        @endif
     </div>
 </nav>

@@ -18,7 +18,7 @@ Route::put('/builds/{build}', [BuildController::class, 'update'])->name('builds-
 Route::delete('/builds/{build}', [BuildController::class, 'destroy'])->name('builds-destroy');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
