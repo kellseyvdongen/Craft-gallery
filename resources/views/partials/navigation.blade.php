@@ -11,6 +11,9 @@
     </div>
     <div class="flex space-x-4">
         @auth
+            <x-nav-link href="{{ route('favorites-index') }}" :active="request()->routeIs('favorites-index')">
+                Favorites
+            </x-nav-link>
             <x-nav-link>{{ Auth::user()->name }}</x-nav-link>
             <form method="POST" action="{{ route('logout') }}">
                 <button type="submit">Log out</button>

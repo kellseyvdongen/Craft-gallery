@@ -10,8 +10,17 @@
                 <div>
                     <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $build->id) }}">View Details</a>
-                    <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
+                    @if(Auth::check() && Auth::user()->id === $build->user_id)
+                        <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>
+                    @else
+                        <form method="POST" action="{{ route('favorites-store', $build->id) }}">
+                            @csrf
+                            <button class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
+                                    type="submit">Favorite
+                            </button>
+                        </form>
+                    @endif
                 </div>
         </article>
     @endforeach
