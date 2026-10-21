@@ -12,7 +12,13 @@ class BuildController extends Controller
      */
     public function index()
     {
-        $builds = Build::all();
+        $search = request()->search;
+        $builds = Build::query();
+
+        if ($search) {
+            $builds = $builds->where('title', 'like', '%' . $search . '%');
+        }
+        $builds = $builds->get();
         return view('builds.index', compact('builds'));
     }
 

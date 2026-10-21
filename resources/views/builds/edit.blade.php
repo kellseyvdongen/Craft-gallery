@@ -1,20 +1,20 @@
-<style>
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    form div {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-</style>
-@if (auth ()->user()->id !== $build->user_id)
-    <p class="text-orange-900">You are not authorized to edit this build.</p>
-@elseif (auth ()->user()->id === $build->user_id)
 <x-layout title="edit {{$build->title}}">
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        form div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    </style>
+    @if (auth ()->user()->id !== $build->user_id)
+        <p class="text-orange-900">You are not authorized to edit this build.</p>
+    @elseif (auth ()->user()->id === $build->user_id)
     <div class="max-w-5xl align-middle mx-auto p-4">
         <h1 class="font-bold text-2xl mb-4">Edit {{$build->title}}</h1>
         <form method="POST" action="{{route('builds-update', $build->id)}}" enctype="multipart/form-data">
@@ -65,5 +65,5 @@
             </form>
         </div>
     </div>
+    @endif
 </x-layout>
-@endif

@@ -1,6 +1,6 @@
 <x-layout>
     <h1 class="font-bold text-2xl mb-4">{{auth()->user()->name}}'s Favorites</h1>
-    <div class="flex flex-wrap gap-4">
+    <div class="flex flex-wrap gap-7">
         @foreach($favorites as $favorite)
             <article class="border p-4 mb-4 rounded-xl w-80 min-h-96 flex flex-col justify-between">
                 <img src="{{ asset('storage/' . $favorite->build->image_url)}}" alt="{{$favorite->build->title}}"

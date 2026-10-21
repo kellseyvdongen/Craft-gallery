@@ -1,17 +1,17 @@
-<style>
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    form div {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-</style>
 <x-layout title="Create Build">
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        form div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    </style>
     <div class="max-w-5xl align-middle mx-auto p-4">
         <h1 class="font-bold text-2xl mb-4">Add your build to our site!</h1>
     <form method="POST" action="{{route('builds-store')}}" enctype="multipart/form-data">
