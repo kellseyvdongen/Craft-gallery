@@ -13,15 +13,17 @@
         <div class="flex flex-wrap gap-7">
     @foreach ($builds as $build)
             <article class="border p-4 mb-4 rounded-xl w-80 min-h-96 flex flex-col justify-between">
+                <div>
                 <img src="{{ asset('storage/' . $build->image_url)}}" alt="{{$build->title}}"
                      class="w-full h-44 object-cover rounded-xl mb-2">
                 <h2 class="font-bold">{{$build->title}}</h2>
                 <p>{{$build->description}}</p>
+                </div>
                 <div class="flex flex-row gap-2">
                     <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $build->id) }}">View Details</a>
                     @if(Auth::check() && Auth::user()->id === $build->user_id)
-                        <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
+                        <a class="p-2 bg-orange-900 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>
                     @elseif(Auth::check() && Auth::user()->id != $build->user_id)
                         <form method="POST" action="{{ route('favorites-store', $build->id) }}">

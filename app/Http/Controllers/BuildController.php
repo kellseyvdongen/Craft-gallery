@@ -103,4 +103,14 @@ class BuildController extends Controller
 
         return redirect()->route('builds-index')->with('success', 'Build deleted successfully.');
     }
+
+    public function popular()
+    {
+        $builds = Build::withCount('favorites')
+            ->orderByDesc('favorites_count')
+            ->take(5)
+            ->get();
+
+        return view('welcome', compact('builds'));
+    }
 }

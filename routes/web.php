@@ -23,9 +23,9 @@ Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites-
 Route::post('/favorites/{id}', [FavoriteController::class, 'store'])->name('favorites-store');
 Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites-destroy');
 
-Route::get('/dashboard', function () {
-    return view('welcome');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [BuildController::class, 'popular'])->name('popular-builds');
+
+Route::get('/dashboard', [BuildController::class, 'popular'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

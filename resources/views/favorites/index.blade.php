@@ -3,10 +3,12 @@
     <div class="flex flex-wrap gap-7">
         @foreach($favorites as $favorite)
             <article class="border p-4 mb-4 rounded-xl w-80 min-h-96 flex flex-col justify-between">
+                <div>
                 <img src="{{ asset('storage/' . $favorite->build->image_url)}}" alt="{{$favorite->build->title}}"
                      class="w-full h-44 object-cover rounded-xl mb-2">
                 <h2 class="font-bold">{{$favorite->build->title}}</h2>
                 <p>{{$favorite->build->description}}</p>
+                </div>
                 <div>
                     <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $favorite->build_id) }}">View Details</a>
