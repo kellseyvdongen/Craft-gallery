@@ -12,6 +12,11 @@
     </div>
     <div class="flex space-x-4 ">
         @auth
+            @if(Auth::user()->role_id === 2)
+                <x-nav-link href="{{ route('admin-builds') }}" :active="request()->routeIs('admin-builds')">
+                    Admin
+                </x-nav-link>
+            @endif
             <x-nav-link href="{{ route('favorites-index') }}" :active="request()->routeIs('favorites-index')">
                 Favorites
             </x-nav-link>

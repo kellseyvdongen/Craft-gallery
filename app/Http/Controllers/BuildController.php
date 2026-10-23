@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Build;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class BuildController extends Controller
@@ -112,5 +113,11 @@ class BuildController extends Controller
             ->get();
 
         return view('welcome', compact('builds'));
+    }
+
+    public function admin_index()
+    {
+        $builds = Build::with('user')->get();
+        return view('admin.builds', compact('builds'));
     }
 }
