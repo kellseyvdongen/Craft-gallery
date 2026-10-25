@@ -7,6 +7,16 @@
             <button class="p-1 bg-green-700 text-white rounded-xl hover:bg-green-600">Search</button>
         </form>
     </div>
+    <div class="mb-4">
+        <a href="{{ route('builds-index') }}"
+           class="p-2 text-green-700 border border-green-700 rounded-lg hover:bg-green-700 hover:text-white">All
+            builds</a>
+        @foreach($categories as $category)
+            <a href="{{ route('builds-index', ['category' => $category->id]) }}"
+               class="p-2 text-green-700 border border-green-700 rounded-lg {{ request('category') == $category->id ? 'bg-green-700 text-white' : 'text-green-700' }}
+               hover:bg-green-700 hover:text-white">{{$category->name}}</a>
+        @endforeach
+    </div>
     @if ($builds->isEmpty())
         <p class="mt-6 text-gray-600">No builds found with this search.</p>
     @else
@@ -23,7 +33,7 @@
                     <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $build->id) }}">View Details</a>
                     @if(Auth::check() && Auth::user()->id === $build->user_id)
-                        <a class="p-2 bg-orange-900 text-white rounded-lg hover:bg-green-600"
+                        <a class="p-2 bg-orange-900 text-white rounded-lg hover:bg-orange-800"
                        href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>
                     @elseif(Auth::check() && Auth::user()->id != $build->user_id)
                         <form method="POST" action="{{ route('favorites-store', $build->id) }}">

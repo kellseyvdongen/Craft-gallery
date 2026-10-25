@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Build;
+use App\Models\Category;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
@@ -13,14 +14,20 @@ class BuildController extends Controller
      */
     public function index()
     {
+        $category = request()->category;
         $search = request()->search;
+
         $builds = Build::query();
+        $categories = Category::all();
 
         if ($search) {
             $builds = $builds->where('title', 'like', '%' . $search . '%');
         }
+        if ($category) {
+            $builds = $builds->where('category_id', $category);
+        }
         $builds = $builds->get();
-        return view('builds.index', compact('builds'));
+        return view('builds.index', compact('builds', 'categories', 'category'));
     }
 
     /**
@@ -45,8 +52,8 @@ class BuildController extends Controller
         $build->title = $request->input('title');
         $build->description = $request->input('description');
         $build->image_url = $nameOfFile;
-        $build->user_id = '1';
-        $build->category_id = $request->input('category_id') ?? '1';
+        $build->user_id = auth()->user()->id;
+        $build->category_id = $request->input('category');
         $build->save();
 
         return redirect()->route('builds-index')->with('success', 'Build created successfully.');

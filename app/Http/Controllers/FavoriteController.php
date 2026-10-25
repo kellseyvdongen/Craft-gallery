@@ -36,6 +36,6 @@ class FavoriteController extends Controller
         if ($favorite) {
             $favorite->delete();
         }
-        return redirect()->route('home');
+        return redirect()->route('favorites-index');
     }
 }
