@@ -33,7 +33,7 @@
         </div>
         <div>
             <label class="font-bold" for="image_url">Image URL</label>
-            <input type="file" id="image_url" name="image_url" value="{{old('image_url')}}">
+            <input type="file" id="image_url" name="image_url" required value="{{old('image_url')}}">
         </div>
         <div>
             <label class="font-bold" for="category">Category</label>

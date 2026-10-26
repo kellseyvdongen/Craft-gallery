@@ -20,14 +20,15 @@ class BuildController extends Controller
         $builds = Build::query();
         $categories = Category::all();
 
-        if ($search) {
-            $builds = $builds->where('title', 'like', '%' . $search . '%');
-        }
         if ($category) {
             $builds = $builds->where('category_id', $category);
         }
+
+        if ($search) {
+            $builds = $builds->where('title', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%');
+        }
         $builds = $builds->get();
-        return view('builds.index', compact('builds', 'categories', 'category'));
+        return view('builds.index', compact('builds', 'categories', 'category', 'search'));
     }
 
     /**
@@ -46,6 +47,7 @@ class BuildController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
+            'image_url' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
         ]);
         $nameOfFile = $request->file('image_url')->storePublicly('builds', 'public');
         $build = new Build();
@@ -74,7 +76,11 @@ class BuildController extends Controller
     public function edit(string $id)
     {
         $build = Build::findOrFail($id);
-        return view('builds.edit', compact('build'));
+        if (auth()->user()->id === $build->user_id || auth()->user()->isAdmin()) {
+            return view('builds.edit', compact('build'));
+        } else {
+            return redirect('/builds')->with('error', 'Unauthorized Page');
+        }
     }
 
     /**

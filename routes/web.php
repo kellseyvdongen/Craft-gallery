@@ -27,7 +27,9 @@ Route::get('/', [BuildController::class, 'popular'])->name('popular-builds');
 Route::get('/dashboard', [BuildController::class, 'popular'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //admin routes
-Route::get('/admin-builds', [BuildController::class, 'admin_index'])->name('admin-builds');
+Route::can('admin')->group(function () {
+    Route::get('/admin-builds', [BuildController::class, 'admin_index'])->name('admin-builds');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
