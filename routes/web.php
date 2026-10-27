@@ -29,6 +29,7 @@ Route::get('/dashboard', [BuildController::class, 'popular'])->middleware(['auth
 //admin routes
 Route::can('admin')->group(function () {
     Route::get('/admin-builds', [BuildController::class, 'admin_index'])->name('admin-builds');
+    Route::post('/admin-builds/{id}', [BuildController::class, 'admin_toggle'])->name('admin-toggle');
 });
 
 Route::middleware('auth')->group(function () {

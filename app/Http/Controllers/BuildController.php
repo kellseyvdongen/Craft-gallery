@@ -17,15 +17,17 @@ class BuildController extends Controller
         $category = request()->category;
         $search = request()->search;
 
-        $builds = Build::query();
+        $builds = Build::where('is_active', true);
         $categories = Category::all();
 
         if ($category) {
             $builds = $builds->where('category_id', $category);
         }
-
         if ($search) {
-            $builds = $builds->where('title', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%');
+            $builds->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%');
+            });
         }
         $builds = $builds->get();
         return view('builds.index', compact('builds', 'categories', 'category', 'search'));
@@ -120,7 +122,8 @@ class BuildController extends Controller
 
     public function popular()
     {
-        $builds = Build::withCount('favorites')
+        $builds = Build::where('is_active', true)
+            ->withCount('favorites')
             ->orderByDesc('favorites_count')
             ->take(5)
             ->get();
@@ -132,5 +135,15 @@ class BuildController extends Controller
     {
         $builds = Build::with('user')->get();
         return view('admin.builds', compact('builds'));
+    }
+
+    public function admin_toggle(string $id)
+    {
+        $build = Build::findOrFail($id);
+
+        $build->is_active = !$build->is_active;
+        $build->save();
+
+        return back()->with('success', 'Status aangepast.');
     }
 }
