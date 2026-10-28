@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Build;
 use App\Models\Category;
+use App\Models\LoginHistory;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BuildController extends Controller
 {
@@ -38,7 +40,16 @@ class BuildController extends Controller
      */
     public function create()
     {
-        return view('builds.create');
+        $loginCount = LoginHistory::where('user_id', Auth::id())->count();
+
+        if ($loginCount < 3) {
+            return redirect()->back()->with(
+                'error',
+                'You must log in at least 3 times before posting a build.'
+            );
+        }
+        $categories = Category::all();
+        return view('builds.create', compact('categories'));
     }
 
     /**

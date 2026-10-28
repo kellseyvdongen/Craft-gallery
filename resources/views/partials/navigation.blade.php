@@ -28,7 +28,14 @@
                     Admin
                 </x-nav-link>
             @endif
-            <x-nav-link>{{ Auth::user()->name }}</x-nav-link>
+                <div class="relative group">
+                    <p>{{ Auth::user()->name }}</p>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-orange-900 shadow-lg rounded-lg w-48 py-2 z-50">
+                        <a href="{{route('profile.edit')}}" class="block px-4 py-2 text-white hover:bg-orange-800">Edit
+                            profile</a>
+                    </div>
+                </div>
             <form method="POST" action="{{ route('logout') }}">
                 <button type="submit">Log out</button>
             </form>
