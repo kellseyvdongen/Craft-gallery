@@ -40,14 +40,6 @@
                 <p>You now have this image uploaded</p>
                 <input type="file" id="image_url" name="image_url" value="{{$build->image_url}}">
             </div>
-            {{--            <div>--}}
-            {{--                <label class="font-bold" for="category">Category</label>--}}
-            {{--                <input class="border-green-700 p-2" type="text" id="category" name="category"--}}
-            {{--                       value="{{$build->category_id}}">--}}
-            {{--                @error ('category')--}}
-            {{--                <span class="text-green-700">{{$message}}</span>--}}
-            {{--                @enderror--}}
-            {{--            </div>--}}
             <div>
                 <button type="submit" class="p-2 bg-green-700 text-white rounded-xl hover:bg-green-600">Update Build
                 </button>

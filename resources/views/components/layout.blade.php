@@ -22,6 +22,11 @@
 <body>
 @include('partials.navigation')
 <main>
+    @if (session('error'))
+        <div class="alert alert-danger text-orange-900">
+            {{ session('error') }}
+        </div>
+    @endif
     {{$slot}}
 </main>
 </body>

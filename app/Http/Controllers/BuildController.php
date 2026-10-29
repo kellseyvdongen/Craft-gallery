@@ -20,10 +20,9 @@ class BuildController extends Controller
         $search = request()->search;
 
         $builds = Build::where('is_active', true);
-        $categories = Category::all();
 
         if ($category) {
-            $builds = $builds->where('category_id', $category);
+            $builds->where('category_id', $category);
         }
         if ($search) {
             $builds->where(function ($query) use ($search) {
@@ -32,6 +31,7 @@ class BuildController extends Controller
             });
         }
         $builds = $builds->get();
+        $categories = Category::all();
         return view('builds.index', compact('builds', 'categories', 'category', 'search'));
     }
 

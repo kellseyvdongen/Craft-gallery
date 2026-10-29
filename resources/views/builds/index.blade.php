@@ -1,21 +1,19 @@
 <x-layout title="Builds">
-    <div class="flex flex-row justify-between">
-    <h1 class="font-bold text-2xl mb-4">Builds</h1>
+    <div class="flex flex-row justify-between mb-4">
+        <h1 class="font-bold text-2xl">Builds</h1>
         <form method="GET" action="{{route('builds-index')}}">
-            <input class="border-green-700 p-1" type="text" id="search" name="search" placeholder="search builds"
+            <input class="border-green-700 p-2" type="text" id="search" name="search" placeholder="search builds"
                    value="{{$search ?? ''}}">
-            <button class="p-1 bg-green-700 text-white rounded-xl hover:bg-green-600">Search</button>
+            <select name="category">
+                <option value="">All builds</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                        {{$category->name}}
+                    </option>
+                @endforeach
+            </select>
+            <button class="p-2 bg-green-700 text-white rounded-xl hover:bg-green-600">Filter</button>
         </form>
-    </div>
-    <div class="mb-4">
-        <a href="{{ route('builds-index') }}"
-           class="p-2 text-green-700 border border-green-700 rounded-lg hover:bg-green-700 hover:text-white">All
-            builds</a>
-        @foreach($categories as $category)
-            <a href="{{ route('builds-index', ['category' => $category->id]) }}"
-               class="p-2 text-green-700 border border-green-700 rounded-lg {{ request('category') == $category->id ? 'bg-green-700 text-white' : 'text-green-700' }}
-               hover:bg-green-700 hover:text-white">{{$category->name}}</a>
-        @endforeach
     </div>
     @if ($builds->isEmpty())
         <p class="mt-6 text-gray-600">No builds found with this search.</p>
