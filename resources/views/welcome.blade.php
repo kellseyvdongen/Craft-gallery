@@ -16,12 +16,16 @@
                     <a class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
                        href="{{ route('builds-show', $build->id) }}">View Details</a>
                     @if(Auth::check() && Auth::user()->id != $build->user_id)
-                        <form method="POST" action="{{ route('favorites-store', $build->id) }}">
-                            @csrf
-                            <button class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
-                                    type="submit">Favorite
-                            </button>
-                        </form>
+                        @if(in_array($build->id, $favorites))
+                            <p class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600">Favorited</p>
+                        @else
+                            <form method="POST" action="{{ route('favorites-store', $build->id) }}">
+                                @csrf
+                                <button class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
+                                        type="submit">Favorite
+                                </button>
+                            </form>
+                        @endif
                     @endif
                 </div>
             </article>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Build;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\LoginHistory;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
@@ -30,9 +31,13 @@ class BuildController extends Controller
                     ->orWhere('description', 'like', '%' . $search . '%');
             });
         }
+        $favorites = [];
+        if (Auth::check()) {
+            $favorites = Favorite::where('user_id', Auth::id())->pluck('build_id')->toArray();
+        }
         $builds = $builds->get();
         $categories = Category::all();
-        return view('builds.index', compact('builds', 'categories', 'category', 'search'));
+        return view('builds.index', compact('builds', 'categories', 'category', 'search', 'favorites'));
     }
 
     /**
@@ -133,13 +138,17 @@ class BuildController extends Controller
 
     public function popular()
     {
+        $favorites = [];
+        if (Auth::check()) {
+            $favorites = Favorite::where('user_id', Auth::id())->pluck('build_id')->toArray();
+        }
         $builds = Build::where('is_active', true)
             ->withCount('favorites')
             ->orderByDesc('favorites_count')
             ->take(5)
             ->get();
 
-        return view('welcome', compact('builds'));
+        return view('welcome', compact('builds', 'favorites'));
     }
 
     public function admin_index()

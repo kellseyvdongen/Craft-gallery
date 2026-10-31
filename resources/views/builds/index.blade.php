@@ -34,12 +34,16 @@
                         <a class="p-2 bg-orange-900 text-white rounded-lg hover:bg-orange-800"
                        href="{{ route('builds-edit', $build->id) }}">Edit/Delete</a>
                     @elseif(Auth::check() && Auth::user()->id != $build->user_id)
-                        <form method="POST" action="{{ route('favorites-store', $build->id) }}">
-                            @csrf
-                            <button class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
-                                    type="submit">Favorite
-                            </button>
-                        </form>
+                        @if(in_array($build->id, $favorites))
+                            <p class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600">Favorited</p>
+                        @else
+                            <form method="POST" action="{{ route('favorites-store', $build->id) }}">
+                                @csrf
+                                <button class="p-2 bg-green-700 text-white rounded-lg hover:bg-green-600"
+                                        type="submit">Favorite
+                                </button>
+                            </form>
+                        @endif
                     @endif
                 </div>
         </article>
